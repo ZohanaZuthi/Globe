@@ -141,11 +141,22 @@ vercel
 4. Accept default settings (auto-detected from Next.js)
 5. Click "Deploy"
 
-**Option 3: Using GitHub Integration**
+**Option 3: GitHub Integration (Continuous Deployment) ⭐ RECOMMENDED**
 
-1. Connect your GitHub repository to Vercel
-2. Enable auto-deployments on push to main branch
-3. All builds and deployments happen automatically
+1. Go to [Vercel Dashboard](https://vercel.com/dashboard)
+2. Select your **Globe** project
+3. Go to **Settings** → **Git**
+4. Verify GitHub integration is connected
+5. Enable **Automatic Deployments** for `main` branch
+6. Now every `git push` to `main` triggers automatic deployment!
+
+**How Continuous Deployment Works:**
+
+- Push code to GitHub `main` branch
+- Vercel automatically detects changes
+- Build starts automatically (~30-45s)
+- Tests run, then deployment goes live
+- Old deployments kept as backups
 
 ### Configuration for Vercel
 
@@ -157,6 +168,45 @@ const nextConfig = {
   reactCompiler: true, // React compiler enabled for performance
 };
 ```
+
+### ✅ Setting Up Continuous Deployment (Automatic)
+
+Once your Vercel project is connected to GitHub, continuous deployment is **automatic**. Here's what happens:
+
+**Setup (One-time):**
+
+```bash
+# Already done! Your GitHub repo is connected to Vercel
+# Just make sure Settings → Git → Automatic Deployments is enabled
+```
+
+**Workflow for Future Updates:**
+
+```bash
+# 1. Make changes locally
+nano app/page.js  # edit your files
+
+# 2. Commit changes
+git add .
+git commit -m "Update landing page"
+
+# 3. Push to GitHub (this triggers automatic Vercel deployment!)
+git push origin main
+
+# 4. Vercel automatically:
+#    - Detects the push
+#    - Runs: npm install
+#    - Runs: npm run build
+#    - Deploys to production
+#    - Your site updates within 1-2 minutes
+```
+
+**Checking Deployment Status:**
+
+- Go to [Vercel Dashboard](https://vercel.com/dashboard)
+- Click your **Globe** project
+- View live deployment logs
+- See deployment history
 
 ### Environment Setup (if needed)
 
@@ -195,6 +245,30 @@ After deployment on Vercel:
 
 ---
 
-**Deployment Link:** [Deploy to Vercel](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fyourrepo%2Fglobe)
+## Links
+
+- **GitHub Repository:** [ZohanaZuthi/Globe](https://github.com/ZohanaZuthi/Globe)
+- **Vercel Project:** [Deployed on Vercel](https://vercel.com/zohanazuthi/globe)
+- **Live Website:** (Your Vercel URL - check your Vercel dashboard)
+
+---
+
+## Fixing Deployment (If Showing Default Next.js Template)
+
+If your Vercel deployment is showing the default "to get started, edit page.js" template instead of your content:
+
+1. **Go to Vercel Dashboard** → Select your project
+2. **Click "Redeploy"** → Select "main" branch → "Redeploy"
+3. Wait for build to complete (check deployment logs)
+4. Once complete, your custom content should appear
+
+**Why this happens:**
+
+- Fresh GitHub connection sometimes needs manual redeploy
+- All future pushes will auto-deploy correctly
+
+---
+
+**Deployment Link:** [Deploy to Vercel](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FZohanaZuthi%2FGlobe)
 
 For more details, check the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying).
